@@ -45,6 +45,7 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
             Text(text = stringResource(R.string.cambio_de_color))
         }
         Spacer(modifier = modifier.height(30.dp))
+        Text(text = "${viewModel.counTime} [s]")
         Text(text = viewModel.resultState)
         Button(onClick = {
             viewModel.fetchData()

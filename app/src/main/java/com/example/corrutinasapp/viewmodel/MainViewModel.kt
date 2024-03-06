@@ -11,11 +11,29 @@ import kotlinx.coroutines.launch
 class MainViewModel:ViewModel() {
     var resultState by mutableStateOf("")
         private set
+    var counTime by mutableStateOf(0)
+        private set
+    var oneCount by mutableStateOf(false)
+        private set
+
+    /*val oneCount by mutableStateOf(false)
+        private set*/
     /*fun bloqueoApp(){
         Thread.sleep(5000)
         resultState = "respuesta de la Web o API"
     }*/
     fun fetchData(){
+        
+        val job = viewModelScope.launch{
+            for (i in 1..5){
+                delay(1000)
+                counTime = i
+            }
+            oneCount = true
+        }
+        if (oneCount){
+            job.cancel()
+        }
         viewModelScope.launch{
             delay(5000)
             resultState = "Respuesta de la API o web"
