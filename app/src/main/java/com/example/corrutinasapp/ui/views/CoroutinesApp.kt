@@ -3,10 +3,9 @@ package com.example.corrutinasapp.ui.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-//import androidx.benchmark.perfetto.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+//import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -28,7 +27,7 @@ import com.example.corrutinasapp.ui.theme.CorrutinasAppTheme
 import com.example.corrutinasapp.viewmodel.MainViewModel
 
 @Composable
-fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier = Modifier){
+fun CoroutinesApp(modifier: Modifier = Modifier, viewModel: MainViewModel = MainViewModel()){
     var changeColor by remember{
         mutableStateOf(false)
     }
@@ -40,9 +39,7 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
     {
         Button(
             //modifier = modifier.fillMaxWidth(),
-            onClick ={
-            changeColor != changeColor
-        },
+            onClick = { changeColor =! changeColor },
                 colors = ButtonDefaults.buttonColors(
                     if(changeColor) Color.Blue else Color.Red
                 )
@@ -57,14 +54,12 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
             Spacer(modifier = modifier.width(15.dp))
             Text(text = "${viewModel.countTime2} [s]")
         }
-
-
         Text(text = viewModel.resultState)
 
         Button(
             //modifier = modifier.fillMaxWidth(),
             onClick = {
-            viewModel.fetchData(1)
+            viewModel.fetchData()
             }
         ) {
             Text(text = stringResource(R.string.realizar_consulta))
@@ -74,9 +69,9 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
         Button(
             //modifier = modifier.fillMaxWidth(),
             onClick = {
-            viewModel.fetchData(2)
+            viewModel.detenerContadores()
         }) {
-            Text(text = stringResource(R.string.detener_timer))
+            Text(text = stringResource(R.string.detener_contadores))
         }
     }
 }

@@ -2,5 +2,5 @@
     <string name="app_name">CorrutinasApp</string>
     <string name="cambio_de_color">Cambio de color</string>
     <string name="realizar_consulta">Realizar Consulta</string>
-    <string name="detener_timer">Detener Timer</string>
+    <string name="detener_contadores">Detener Contadores</string>
 </resources>

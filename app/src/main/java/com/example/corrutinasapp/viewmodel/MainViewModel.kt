@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -20,6 +21,8 @@ class MainViewModel:ViewModel() {
         private set
     var twoCount by mutableStateOf(false)
         private set
+    private var job: Job?= null
+    private var job2: Job ?= null
 
     /*val oneCount by mutableStateOf(false)
         private set*/
@@ -27,32 +30,37 @@ class MainViewModel:ViewModel() {
         Thread.sleep(5000)
         resultState = "respuesta de la Web o API"
     }*/
-    fun fetchData(num: Any){
-        val job = viewModelScope.launch{
+    fun fetchData(){
+        job = viewModelScope.launch{
             for (i in 1..5){
                 delay(1000)
                 countTime = i
             }
             oneCount = true
         }
-        val job2 = viewModelScope.launch{
+        job2 = viewModelScope.launch{
+            job?.join()
             for (i in 5..20){
-                delay(6000)
+                delay(1000)
                 countTime2 = i
             }
             twoCount = true
         }
-        if (oneCount || num == 2){
-            job.cancel()
+        if (oneCount){
+            job?.cancel()
         }
-        if (twoCount || num == 2){
-            job2.cancel()
+        if (twoCount){
+            job2?.cancel()
         }
         viewModelScope.launch{
             delay(5000)
             resultState = "Respuesta de la API o web"
         }
 
+    }
+    fun detenerContadores(){
+        job?.cancel()
+        job2?.cancel()
     }
 
 }
