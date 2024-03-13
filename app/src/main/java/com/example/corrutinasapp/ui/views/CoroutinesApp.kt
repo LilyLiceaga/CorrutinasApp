@@ -55,7 +55,7 @@ fun CoroutinesApp(modifier: Modifier = Modifier, viewModel: MainViewModel = Main
             Text(text = "${viewModel.countTime2} [s]")
         }
         Text(text = viewModel.resultState)
-
+        Spacer(modifier = modifier.height(15.dp))
         Button(
             //modifier = modifier.fillMaxWidth(),
             onClick = {
