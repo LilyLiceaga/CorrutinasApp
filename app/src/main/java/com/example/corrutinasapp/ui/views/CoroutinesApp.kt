@@ -2,9 +2,13 @@ package com.example.corrutinasapp.ui.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+//import androidx.benchmark.perfetto.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -34,7 +38,9 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        Button(onClick ={
+        Button(
+            //modifier = modifier.fillMaxWidth(),
+            onClick ={
             changeColor != changeColor
         },
                 colors = ButtonDefaults.buttonColors(
@@ -44,13 +50,33 @@ fun CoroutinesApp(viewModel: MainViewModel = MainViewModel(), modifier: Modifier
         {
             Text(text = stringResource(R.string.cambio_de_color))
         }
-        Spacer(modifier = modifier.height(30.dp))
-        Text(text = "${viewModel.counTime} [s]")
+        Spacer(modifier = modifier.height(10.dp))
+
+        Row{
+            Text(text = "${viewModel.countTime} [s]")
+            Spacer(modifier = modifier.width(15.dp))
+            Text(text = "${viewModel.countTime2} [s]")
+        }
+
+
         Text(text = viewModel.resultState)
-        Button(onClick = {
-            viewModel.fetchData()
-        }) {
+
+        Button(
+            //modifier = modifier.fillMaxWidth(),
+            onClick = {
+            viewModel.fetchData(1)
+            }
+        ) {
             Text(text = stringResource(R.string.realizar_consulta))
+        }
+        Spacer(modifier = modifier.height(20.dp))
+
+        Button(
+            //modifier = modifier.fillMaxWidth(),
+            onClick = {
+            viewModel.fetchData(2)
+        }) {
+            Text(text = stringResource(R.string.detener_timer))
         }
     }
 }
